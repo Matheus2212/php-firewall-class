@@ -1,6 +1,6 @@
 # PHP Simple Firewall Class based in IP
 
-It uses (DB class)[https://github.com/Matheus2212/php-database-class] as dependency. 
+It uses [DB Class](https://github.com/Matheus2212/php-database-class) as dependency. 
 
 This class is meant to check the IP of accesses based in 4 tables:
 * White List;
