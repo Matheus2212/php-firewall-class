@@ -1,6 +1,6 @@
 # PHP Simple Firewall Class based in IP
 
-It uses DB class as dependency. 
+It uses (DB class)[https://github.com/Matheus2212/php-database-class] as dependency. 
 
 This class is meant to check the IP of accesses based in 4 tables:
 * White List;
@@ -15,18 +15,18 @@ The goal for the class, is to limit the total amount of requests per minute, and
 Table Collumns:
 
 MinuteList
-* id 
+* id (primary|int)
 * ip (varchar 64)
 * created_at (datetime)
 * requests (int)
 
 BlackList, WhiteList
-* id
+* id (primary|int)
 * ip (varchar 64)
 * created_at (datetime)
 
 TemporaryList
-* id
+* id (primary|int)
 * ip (varchar 64)
 * blocked (enum: s,n)
 * n_times_blocked (int)
