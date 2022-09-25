@@ -15,7 +15,7 @@ db::addConnection("default", array(
 ));
 
 // includes firewall
-include("firewall.class.php");
+include("FirewallClass.php");
 
 // sets firewall tables
 Firewall::setTable("whiteListTable", "firewall_white_list");
