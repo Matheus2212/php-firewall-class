@@ -14,7 +14,7 @@ class Firewall
         public static function getIP()
         {
                 $ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
-                $ip = preg_replace("/[^0-9a-z\.\:]/", "", $ip);
+                $ip = preg_replace("/[^0-9a-zA-Z\.\:]/", "", $ip);
                 return $ip;
         }
 
