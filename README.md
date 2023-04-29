@@ -30,6 +30,7 @@ You can do it inserting on the "Black List" table, or, if the visitor gets in te
 
 * This class works well for static IPs;
 * Switching from wifi to phone's connection changes the device IP, therefore, if it was blocked before, since it is now a different IP, will be allowed to access what it was trying to (maybe use cookies to prevent this?).
+* Case there's no firewall tables on the database, the class now can create it, using the [DB Class](https://github.com/Matheus2212/php-database-class)
 
 ---
 

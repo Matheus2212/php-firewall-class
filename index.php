@@ -1,17 +1,22 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 // sets timezone
 date_default_timezone_set('America/Sao_Paulo');
 
 // includes the database class file
-include("../testes/php-database-class/db.class.php");
+include("../php-database-class/DbClass.php");
 
 // adds "default" connection
 db::addConnection("default", array(
         "HOST" => "localhost",
-        "USER" => "root",
-        "PASSWORD" => "",
-        "NAME" => "chili-extension"
+        "USER" => "user",
+        "PASSWORD" => "148700",
+        "NAME" => "test"
 ));
 
 // includes firewall
@@ -24,4 +29,4 @@ Firewall::setTable("temporaryListTable", "firewall_temporary_list");
 Firewall::setTable("minuteListTable", "firewall_minute_list");
 
 // starts the firewall, passing (int) 20 as max requests per minute. 
-Firewall::init(20);
+//Firewall::init(20);

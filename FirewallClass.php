@@ -13,29 +13,53 @@ class Firewall
         // retrieves user's IP address
         public static function getIP()
         {
-                $ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
-                $ip = preg_replace("/[^0-9a-zA-Z\.\:]/", "", $ip);
+                $ip = $_SERVER['REMOTE_ADDR'];
+                if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+                        $ip = $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                }
+                $ip = preg_replace('/[^0-9a-zA-Z\.\:]/', '', $ip);
                 return $ip;
         }
 
-        // set tables
+
+        // set tables - and creates if dont exists, using the db class
         public static function setTable($which, $table)
         {
+
+                $checkTable = function ($table, $target) {
+                        if (db::empty("DESCRIBE $table")) {
+                                $contents = @file_get_contents("./$target.sql");
+                                if ($contents) {
+                                        $contents = preg_replace("/$target/", $table, $contents);
+                                        db::execute($contents);
+                                }
+                        }
+                };
+
                 switch ($which) {
-                        case "whiteListTable":
+                        case 'whiteListTable':
                                 self::$whiteListTable = $table;
+                                $checkTable($table, 'whiteListTable');
                                 break;
-                        case "blackListTable":
+                        case 'blackListTable':
                                 self::$blackListTable = $table;
+                                $checkTable($table, 'blackListTable');
                                 break;
-                        case "temporaryListTable":
+                        case 'temporaryListTable':
                                 self::$temporaryListTable = $table;
+                                $checkTable($table, 'temporaryListTable');
                                 break;
-                        case "minuteListTable":
+                        case 'minuteListTable':
                                 self::$minuteListTable = $table;
+                                $checkTable($table, 'temporaryListTable');
                                 break;
+                        default:
+                                throw new InvalidArgumentException('Invalid table name: ' . $which);
                 }
-                return new static();
+
+                return new self();
         }
 
         // returns date now 
