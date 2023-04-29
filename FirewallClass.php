@@ -30,7 +30,7 @@ class Firewall
 
                 $checkTable = function ($table, $target) {
                         if (db::empty("DESCRIBE $table")) {
-                                $contents = @file_get_contents("./$target.sql");
+                                $contents = @file_get_contents(__DIR__ . "/$target.sql");
                                 if ($contents) {
                                         $contents = preg_replace("/$target/", $table, $contents);
                                         db::execute($contents);
