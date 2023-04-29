@@ -53,7 +53,7 @@ class Firewall
                                 break;
                         case 'minuteListTable':
                                 self::$minuteListTable = $table;
-                                $checkTable($table, 'temporaryListTable');
+                                $checkTable($table, 'minuteListTable');
                                 break;
                         default:
                                 throw new InvalidArgumentException('Invalid table name: ' . $which);
